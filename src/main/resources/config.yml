@@ -1,0 +1,5 @@
+serverMappings:
+  - virtualHost: "play.server1.com"
+    serverName: "server1"
+  - virtualHost: "play.server2.com"
+    serverName: "server2"
