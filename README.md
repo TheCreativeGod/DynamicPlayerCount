@@ -10,7 +10,7 @@ serverMappings:
     serverName: "lobby"
   - virtualHost: "pvp.server2.com"
     serverName: "pvp"
-
+loggingEnabled: false
 ```
 
 # This is a work in progress and has not been tested using different plugins setups
