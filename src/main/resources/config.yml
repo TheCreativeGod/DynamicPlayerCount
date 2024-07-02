@@ -1,6 +1,6 @@
-serverMappings:
-  - virtualHost: "play.server1.com"
+servers:
+  - host: "play.server1.com"
     serverName: "server1"
-  - virtualHost: "play.server2.com"
+  - host: "play.server2.com"
     serverName: "server2"
-loggingEnabled: false
+debug: false

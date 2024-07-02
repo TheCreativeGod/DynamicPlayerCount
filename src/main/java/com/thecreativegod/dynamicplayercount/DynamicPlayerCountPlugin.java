@@ -24,13 +24,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Plugin(id = "dynamicplayercount", name = "Dynamic Player Count", version = "0.2-SNAPSHOT", description = "Dynamically changes player count based on URL", authors = "TheCreativeGod")
+@Plugin(id = "dynamicplayercount", name = "Dynamic Player Count", version = "0.3-SNAPSHOT", description = "Dynamically changes player count based on URL", authors = "TheCreativeGod")
 public class DynamicPlayerCountPlugin {
 
     private static final Logger logger = LoggerFactory.getLogger(DynamicPlayerCountPlugin.class);
     private final ProxyServer server;
     private Map<String, String> serverMappings;
-    private boolean loggingEnabled;
+    private boolean debug;
 
     @Inject
     public DynamicPlayerCountPlugin(ProxyServer server) {
@@ -65,37 +65,37 @@ public class DynamicPlayerCountPlugin {
         Path configPath = Paths.get("plugins/DynamicPlayerCount/config.yml");
         try {
             Config config = mapper.readValue(configPath.toFile(), Config.class);
-            serverMappings = config.getServerMappings().stream()
-                .collect(Collectors.toMap(ServerMapping::getVirtualHost, ServerMapping::getServerName));
-            loggingEnabled = config.isLoggingEnabled();
+            serverMappings = config.getServers().stream()
+                .collect(Collectors.toMap(ServerMapping::getHost, ServerMapping::getServerName));
+            debug = config.isDebug();
             
             // Log the server mappings during configuration loading (always)
-            serverMappings.forEach((virtualHost, serverName) -> 
-                logger.info("Mapping virtual host " + virtualHost + " to server " + serverName));
+            serverMappings.forEach((host, serverName) -> 
+                logger.info("Mapping virtual host " + host + " to server " + serverName));
         } catch (IOException e) {
             logger.error("Unable to load configuration", e);
         }
     }
 
     public static class Config {
-        private List<ServerMapping> serverMappings;
-        private boolean loggingEnabled;
+        private List<ServerMapping> servers;
+        private boolean debug;
 
-        public List<ServerMapping> getServerMappings() {
-            return serverMappings;
+        public List<ServerMapping> getServers() {
+            return servers;
         }
 
-        public boolean isLoggingEnabled() {
-            return loggingEnabled;
+        public boolean isDebug() {
+            return debug;
         }
     }
 
     public static class ServerMapping {
-        private String virtualHost;
+        private String host;
         private String serverName;
 
-        public String getVirtualHost() {
-            return virtualHost;
+        public String getHost() {
+            return host;
         }
 
         public String getServerName() {
@@ -142,7 +142,7 @@ public class DynamicPlayerCountPlugin {
         }
 
         private void log(String message) {
-            if (loggingEnabled) {
+            if (debug) {
                 logger.info(message);
             }
         }
