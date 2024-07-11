@@ -1,6 +1,21 @@
+# Map your servers here
+# host: The host that will be used on the server list where you want to display a different player count
+# serverName: The server in your network which this host will ping for the player count
+# maxPlayerCount: If you want to set a maximum player count to be showed when server is pinged in the server list
+# type: Options are "dynamic" and "static"
+  # dynamic: Changes the maximum player count to the amount of current players in the server +1
+  # static: Changes the maximum player count to a specific number
+# maxPlayers: Changes the maximum player count to this value (only used if "type" is set to "static")
 servers:
   - host: "play.server1.com"
     serverName: "server1"
+    maxPlayerCount: false
+    type: "dynamic"
+    maxPlayers: 100
   - host: "play.server2.com"
     serverName: "server2"
+    maxPlayerCount: false
+    type: "static"
+    maxPlayers: 50
+# Debug: Turn it to "true" if you want to see pings made to your network
 debug: false
