@@ -26,4 +26,4 @@ debug: false
 
 `static` sets the max player amount in your host to the `maxPlayers` number, while `dynamic` changes it to current players +1 (planning to add more functionality on the `dynamic` type)
 
-**This plugin has not been tested using different plugins setups. Please submit an issue if you encounter any problem with another plugins or in general**
+**This plugin has not been tested using different plugins setups. Please submit an issue if you encounter any problem with other plugins or in general**
